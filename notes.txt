@@ -1,0 +1,61 @@
+1. klasa mapa 
+	parametry:
+		width
+		height
+		tablica pol mapy
+		tablica miast
+		tablica jednostek na mapie
+	metody:
+		ruszanie sie (z klikaniem na jednostki)
+		losowanie specjalnych pol (przy konstruktorze)
+		napierdalanie sie 
+2. klasa pole mapy
+	parametry:
+		typ pola
+		ile sie przez nie idzie
+		profity - ew. rozdzielic
+		jakie jednostki moga wejsc
+3. klasa miasto
+	parametry:
+		do ktorej cywilizacji nalezy
+		gdzie wgl jest
+		ilosc wytwarzanego jedzenia
+		ilosc wytwarzanych punktow produckji (mlotki)
+		ilosc mieszkancow
+		ilosc budynkow
+	metody:
+		nowy budynek
+		nowa jednostka (po chuj)
+		produkcja jedzenia
+4. klasa jednostka
+	parametry:
+		gdzie ona wgl jest
+		do ktorej cywilizacji nalezy
+		typ
+		punkty zycia
+	metody:
+		utworz miasto - osadnik
+5. klasa typ jednostki 
+	parametry:
+		o ile pol sie rusza co ture
+		siła 
+6. klasa Vector2d
+	parametry:
+		iks
+		igrek
+7. klasa cywilizacja 
+	parametry:
+		zasoby złota
+		zasoby prestiżu
+8. simulejszyn endżin
+	metody:
+		inicjalizacja
+		
+
+mozna osobne klasy na osobne typy jednostki, ale to zalezy ile ich bedzie (jak malo to ok ale jak duzo to nie)
+
+liczba tur dajmy na to 100
+jak inne cywilizacje przestana istniec przed 100 to wygrywa ta co przezyla
+jak zadna jednostka nie przezyje do 100 to wygrywa ta z najwiekszym prestizem (cywilizacja)
+jak dobijemy do 100 to koniec i wygrywaja ci co maja najweicej prestizu pora na csa
+	
