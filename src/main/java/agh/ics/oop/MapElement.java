@@ -1,4 +1,9 @@
 package agh.ics.oop;
 
-public class MapElement {
+public enum MapElement {
+    DESERT,
+    RIVER,
+    PLAIN,
+    FOREST,
+    MOUNTAINS
 }
