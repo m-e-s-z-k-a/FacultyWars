@@ -34,5 +34,28 @@ public class Individual
         this.position = newPosition;
     }
 
+    public void setHealthPoints(int healthPoints)
+    {
+        this.healthPoints = healthPoints;
+    }
 
+    public void setPosition(Vector2d position)
+    {
+        this.position = position;
+    }
+
+    public int getHealthPoints()
+    {
+        return this.healthPoints;
+    }
+
+    public int getAttackPoints()
+    {
+        return attackPoints;
+    }
+
+    public int getDefencePoints()
+    {
+        return defencePoints;
+    }
 }

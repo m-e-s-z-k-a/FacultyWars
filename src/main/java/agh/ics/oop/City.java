@@ -7,6 +7,7 @@ public class City
     private int numberOfCitizens;
     private int numberOfHammers;
     private int foodProduction;
+    private int numberOfBuilding;
 
     public City(Vector2d location, Civilization civ)
     {
@@ -17,6 +18,23 @@ public class City
         this.belongsTo = civ;
     }
 
+    public Vector2d getLocation()
+    {
+        return location;
+    }
 
+    public void setNumberOfCitizens(int numberOfCitizens)
+    {
+        this.numberOfCitizens = numberOfCitizens;
+    }
 
+    public int getNumberOfCitizens()
+    {
+        return numberOfCitizens;
+    }
+
+    public void setNumberOfHammers(int numberOfHammers)
+    {
+        this.numberOfHammers = numberOfHammers;
+    }
 }

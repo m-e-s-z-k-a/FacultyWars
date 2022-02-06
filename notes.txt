@@ -59,3 +59,11 @@ jak inne cywilizacje przestana istniec przed 100 to wygrywa ta co przezyla
 jak zadna jednostka nie przezyje do 100 to wygrywa ta z najwiekszym prestizem (cywilizacja)
 jak dobijemy do 100 to koniec i wygrywaja ci co maja najweicej prestizu pora na csa
 	
+cywilizacja dostaje punkty prestiżu za:
+- wygraną walkę
+- zbudowany budynek
+- każde zbudowane miasto
+- złoto
+
+cywilizacja dostaje złoto za:
+- każde x mieszkańców

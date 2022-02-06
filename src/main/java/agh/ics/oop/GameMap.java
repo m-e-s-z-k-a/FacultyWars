@@ -52,10 +52,10 @@ public class GameMap
         Vector2d newPosition = ind.getPosition().add(direction.toUnitVector());
         if (canMoveTo(ind, newPosition))
         {
-            if (mapElements.containsKey(newPosition))
-            {
-                //napierdalansko ;33
-            }
+            if (individuals.containsKey(newPosition))
+                fight(ind, individuals.get(newPosition));
+            else if (cities.containsKey(newPosition))
+                cityAttack(ind, cities.get(newPosition));
             else
             {
                 ind.changePosition(newPosition);
@@ -63,6 +63,36 @@ public class GameMap
                 this.individuals.remove(oldPosition, ind);
             }
         }
+    }
+
+    /** attacker - the one making the move, defender - the one defending theirs position */
+    public void fight(Individual attacker, Individual defender)
+    {
+        Vector2d attackerPosition = attacker.getPosition();
+        Vector2d defenderPosition = defender.getPosition();
+        MapElement mapElement = mapElements.get(defenderPosition);
+        int attackerFightPoints = attacker.getHealthPoints() + attacker.getAttackPoints() + attacker.getDefencePoints() +
+                attacker.getType().fightProfit(mapElement) + attacker.getType().defenceProfit(mapElement);
+        int defenderFightPoints = defender.getHealthPoints() + defender.getAttackPoints() + defender.getDefencePoints() +
+                defender.getType().fightProfit(mapElement) + defender.getType().defenceProfit(mapElement);
+        if (defenderFightPoints >= attackerFightPoints)
+        {
+            individuals.remove(attackerPosition);
+            defender.setHealthPoints(defenderFightPoints - attackerFightPoints);
+        }
+        else
+        {
+            individuals.remove(defenderPosition);
+            individuals.put(defenderPosition, attacker);
+            attacker.setPosition(defenderPosition);
+        }
+    }
+
+    public void cityAttack(Individual ind, City city)
+    {
+        MapElement indMapElement = mapElements.get(ind.getPosition());
+        int indFightPoints = ind.getAttackPoints() + ind.getDefencePoints() +
+                ind.getType().fightProfit(indMapElement) + ind.getType().defenceProfit(indMapElement);
     }
 
 
