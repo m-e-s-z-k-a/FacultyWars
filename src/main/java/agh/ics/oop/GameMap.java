@@ -45,7 +45,7 @@ public class GameMap
     {
         Vector2d oldPosition = ind.getPosition();
         Vector2d newPosition = ind.getPosition().add(direction.toUnitVector());
-        if (canMoveTo(ind, newPosition))
+        if (canMoveTo(ind, newPosition) || ind.useMovePoint())
         {
             if (individuals.containsKey(newPosition))
                 fight(ind, individuals.get(newPosition));
@@ -114,9 +114,15 @@ public class GameMap
         ind.getCivilization().changePrestigeResources(50);
     }
 
-    private boolean isOccupied(Vector2d position)
+    public void placeCityAtTheBeginning(Civilization civ, Vector2d pos)
     {
-        return !this.individuals.containsKey(position) && !this.cities.containsKey(position);
+        City city = new City(pos, civ);
+        cities.put(pos, city);
+    }
+
+    public boolean isOccupied(Vector2d position)
+    {
+        return this.individuals.containsKey(position) || this.cities.containsKey(position);
     }
 
     public Object objectAt(Vector2d position)
@@ -141,5 +147,23 @@ public class GameMap
     public MapElement getFieldElement(Vector2d position)
     {
         return mapElements.get(position);
+    }
+
+    public void refreshIndividualsMovePoints()
+    {
+        for(Vector2d key: individuals.keySet())
+            individuals.get(key).refreshMovePoints();
+    }
+
+    public void refreshCities()
+    {
+        for(Vector2d key: cities.keySet())
+        {
+            City city = cities.get(key);
+            // order of function calls IMPORTANT!!!
+            city.updateStatistics();
+            city.createNewCitizens();
+            city.produceFoodAndHammers();
+        }
     }
 }

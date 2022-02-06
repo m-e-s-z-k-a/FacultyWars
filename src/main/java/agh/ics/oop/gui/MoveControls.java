@@ -20,6 +20,7 @@ public class MoveControls extends HBox
         upDownButtonsBox.setAlignment(Pos.CENTER);
         upDownButtonsBox.setSpacing(5);
         this.getChildren().addAll(leftButton, upDownButtonsBox, rightButton);
+        this.setAlignment(Pos.CENTER);
         this.setSpacing(5); // TODO ?
     }
 }

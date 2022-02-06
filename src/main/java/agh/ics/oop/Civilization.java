@@ -4,11 +4,13 @@ public class Civilization
 {
     private int goldResources;
     private int prestigeResources;
+    private int ordinal;
 
-    public Civilization(int goldResources, int prestigeResources)
+    public Civilization(int ordinal)
     {
-        this.goldResources = goldResources;
-        this.prestigeResources = prestigeResources;
+        this.goldResources = 0;
+        this.prestigeResources = 0;
+        this.ordinal = ordinal;
     }
 
     public void changePrestigeResources(int value)
@@ -19,5 +21,10 @@ public class Civilization
     public void changeGoldResources(int value)
     {
         this.goldResources += value;
+    }
+
+    public int getOrdinal()
+    {
+        return ordinal;
     }
 }

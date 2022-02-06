@@ -1,13 +1,10 @@
 package agh.ics.oop.gui;
 
-import agh.ics.oop.GameMap;
-import agh.ics.oop.SimulationEngine;
-import agh.ics.oop.Vector2d;
+import agh.ics.oop.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Cell;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -15,7 +12,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 
-public class App extends Application{
+public class App extends Application {
 
     private final double GRID_SIZE = 600.0;
     private double CELL_WIDTH;
@@ -30,6 +27,7 @@ public class App extends Application{
 
     private int width;
     private int height;
+
     @Override
     public void start(Stage primaryStage)
     {
@@ -43,7 +41,7 @@ public class App extends Application{
                 int numberOfPlayers = (int) ((Slider) (welcomeBox.playersNumberBox.getChildren().get(1))).getValue();
                 this.height = (int) ((Slider) (welcomeBox.mapHeightBox.getChildren().get(1))).getValue();
                 this.width = (int) ((Slider) (welcomeBox.mapWidthBox.getChildren().get(1))).getValue();
-                this.engine = new SimulationEngine(width, height, numberOfPlayers, NUMBER_OF_ROUNDS, this); // TODO ???
+                this.engine = new SimulationEngine(width, height, numberOfPlayers, NUMBER_OF_ROUNDS, this);
                 this.gameMap = engine.getGameMap();
                 welcomeStage.close();
                 System.out.println(height + " " + width + " " + numberOfPlayers); // TODO remove test
@@ -75,11 +73,8 @@ public class App extends Application{
 
                 if (obj == null)
                     mapGridPane.add(GuiElement.createElement(gameMap.getFieldElement(position), CELL_WIDTH, CELL_HEIGHT), i, j);
-//                else
-//                {
-//                    GridPane.setHalignment(button, HPos.CENTER);
-//                    mapGridPane.add(i, j);
-//                }
+                else
+                    mapGridPane.add(createButton(obj), i, j);
             }
 
         mapGridPane.setGridLinesVisible(true);
@@ -113,7 +108,16 @@ public class App extends Application{
 
     public Button createButton(Object obj)
     {
-        Button button = new Button();
+        // TODO
+        Button button;
+        if (obj instanceof City city)
+            button = GuiElement.createCityButton(city, CELL_WIDTH, CELL_HEIGHT);
+        else
+        {
+            Individual ind = (Individual) obj;
+            button = GuiElement.createIndividualButton(ind, CELL_WIDTH, CELL_HEIGHT);
+        }
+
         return button;
     }
 }

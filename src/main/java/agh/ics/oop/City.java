@@ -48,15 +48,23 @@ public class City
         return numberOfHammers;
     }
 
+    public int getNumberOfBuildings() {return numberOfBuildings;}
+
+    public int getFoodAmount(){return foodAmount;}
+
     public void buildNewBuilding()
     {
-        numberOfBuildings++;
-        numberOfHammers -= 50;
-        civilization.changePrestigeResources(30);
+        if (numberOfHammers >= 50)
+        {
+            numberOfBuildings++;
+            numberOfHammers -= 50;
+            civilization.changePrestigeResources(30);
+        }
     }
 
     public void createNewCitizens() {
-        if (foodAmount > 10) {
+        if (foodAmount > 10)
+        {
             numberOfCitizens += foodAmount / 10;
             foodAmount = foodAmount % 10;
         }
@@ -76,4 +84,8 @@ public class City
         numberOfHammers += hammersProduction;
     }
 
+    public Civilization getCivilization()
+    {
+        return civilization;
+    }
 }

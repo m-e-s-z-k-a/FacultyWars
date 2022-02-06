@@ -111,4 +111,18 @@ public enum IndividualType {
             case MAGE -> 3;
         };
     }
+
+    public String getImagePath()
+    {
+        return switch(this)
+        {
+            case AGGRESSOR -> "agresor.png";
+            case MAGE -> "mag.png";
+            case PIRATE -> "pirat.png";
+            case SANDMAN -> "sandman.png";
+            case HIKER -> "hiker.png";
+            case MOUNTAIN_MAN -> "goral.png";
+            case SETTLER -> "settler.png";
+        };
+    }
 }

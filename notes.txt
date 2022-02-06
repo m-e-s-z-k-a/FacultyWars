@@ -75,3 +75,7 @@ liczba tur dajmy na to 100
 jak inne cywilizacje przestana istniec przed 100 to wygrywa ta co przezyla
 jak zadna jednostka nie przezyje do 100 to wygrywa ta z najwiekszym prestizem (cywilizacja)
 jak dobijemy do 100 to koniec i wygrywaja ci co maja najweicej prestizu pora na csa
+
+TURY
+SETONACTION
+OZNACZYĆ LUDKÓW I MIASTA

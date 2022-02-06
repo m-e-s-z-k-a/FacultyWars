@@ -16,6 +16,7 @@ public class ParameterBox extends HBox
         label.setFont(font);
         Slider slider = new Slider(min, max, (int)((min+max)/2.0));
         slider.setMajorTickUnit(1.0);
+        slider.setMinorTickCount(0);
         slider.setShowTickMarks(true);
         slider.setSnapToTicks(true);
         slider.setShowTickLabels(true);

@@ -10,14 +10,16 @@ public class Individual
     private int attackPoints;
     private int defencePoints;
     private int availableMovePoints;
+    private GameMap gameMap;
 
-    public Individual(Civilization civ, Vector2d position, IndividualType type)
+    public Individual(Civilization civ, Vector2d position, IndividualType type, GameMap gameMap)
     {
         this.belongsTo = civ;
         this.healthPoints = 100;
         this.position = position;
         this.type = type;
         this.availableMovePoints = type.getMovePoints();
+        this.gameMap = gameMap;
     }
 
     public IndividualType getType()
@@ -80,5 +82,10 @@ public class Individual
     public void refreshMovePoints()
     {
         this.availableMovePoints = type.getMovePoints();
+    }
+
+    public GameMap getGameMap()
+    {
+        return gameMap;
     }
 }
