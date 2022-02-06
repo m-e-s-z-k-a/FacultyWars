@@ -101,4 +101,14 @@ public enum IndividualType {
             result = 5;
         return result;
     }
+
+    public int getMovePoints()
+    {
+        return switch(this)
+        {
+            case AGGRESSOR, SANDMAN, MOUNTAIN_MAN, SETTLER -> 1;
+            case PIRATE, HIKER -> 2;
+            case MAGE -> 3;
+        };
+    }
 }

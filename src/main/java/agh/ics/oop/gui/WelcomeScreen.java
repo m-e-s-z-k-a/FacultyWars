@@ -8,7 +8,7 @@ import javafx.scene.text.Font;
 
 public class WelcomeScreen extends VBox
 {
-    Label title = new Label("Wilkommen aus dem Spiel");
+    Label title = new Label("Willkommen aus dem Spiel");
     public ParameterBox playersNumberBox = new ParameterBox("number of players", 2, 10);
     public ParameterBox mapWidthBox = new ParameterBox("map width", 10, 100);
     public ParameterBox mapHeightBox = new ParameterBox("map height", 10, 100);
@@ -19,12 +19,8 @@ public class WelcomeScreen extends VBox
         super();
         title.setFont(new Font("Comic Sans MS", 20));
         startButton.setFont(new Font("Comic Sans MS", 10));
-        this.getChildren().add(title);
-        this.getChildren().add(playersNumberBox);
-        this.getChildren().add(mapWidthBox);
-        this.getChildren().add(mapHeightBox);
-        this.getChildren().add(startButton);
-        this.setAlignment(Pos.CENTER);
+        this.getChildren().addAll(title, playersNumberBox, mapWidthBox, mapHeightBox, startButton);
+        this.setAlignment(Pos.CENTER); // TODO ?
         this.setSpacing(15);
     }
 }

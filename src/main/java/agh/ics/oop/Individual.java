@@ -9,6 +9,7 @@ public class Individual
     private int healthPoints;
     private int attackPoints;
     private int defencePoints;
+    private int availableMovePoints;
 
     public Individual(Civilization civ, Vector2d position, IndividualType type)
     {
@@ -16,7 +17,7 @@ public class Individual
         this.healthPoints = 100;
         this.position = position;
         this.type = type;
-
+        this.availableMovePoints = type.getMovePoints();
     }
 
     public IndividualType getType()
@@ -64,4 +65,20 @@ public class Individual
         return this.belongsTo;
     }
 
+    // returns false if move not available
+    public boolean useMovePoint()
+    {
+        if (availableMovePoints > 0)
+        {
+            this.availableMovePoints--;
+            return true;
+        }
+        return false;
+    }
+
+    // na początku tury
+    public void refreshMovePoints()
+    {
+        this.availableMovePoints = type.getMovePoints();
+    }
 }

@@ -14,14 +14,12 @@ public class ParameterBox extends HBox
     {
         Label label = new Label(title);
         label.setFont(font);
-        Slider slider = new Slider(min, max, (min+max)/2);
+        Slider slider = new Slider(min, max, (int)((min+max)/2.0));
         slider.setMajorTickUnit(1.0);
         slider.setShowTickMarks(true);
         slider.setSnapToTicks(true);
         slider.setShowTickLabels(true);
-        slider.setShowTickLabels(true);
-        this.getChildren().add(label);
-        this.getChildren().add(slider);
+        this.getChildren().addAll(label, slider);
         this.setAlignment(Pos.CENTER);
         this.setSpacing(10);
     }

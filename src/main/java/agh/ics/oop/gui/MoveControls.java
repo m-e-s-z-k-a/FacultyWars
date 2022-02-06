@@ -7,22 +7,19 @@ import javafx.scene.layout.VBox;
 
 public class MoveControls extends HBox
 {
-    public Button upButton = new Button("up");
-    public Button downButton = new Button("down");
-    public Button leftButton = new Button("right");
-    public Button rightButton = new Button("left");
+
+    public Button upButton = new Button("\u2191");
+    public Button downButton = new Button("\u2193");
+    public Button leftButton = new Button("\u2190");
+    public Button rightButton = new Button("\u2192");
 
     public MoveControls()
     {
         super();
-        VBox updownButtonsBox = new VBox(upButton, downButton);
-        updownButtonsBox.setAlignment(Pos.CENTER);
-        updownButtonsBox.setSpacing(5);
-        this.getChildren().add(leftButton);
-        this.getChildren().add(updownButtonsBox);
-        this.getChildren().add(rightButton);
-        this.setAlignment(Pos.CENTER);
-        this.setSpacing(5);
+        VBox upDownButtonsBox = new VBox(upButton, downButton);
+        upDownButtonsBox.setAlignment(Pos.CENTER);
+        upDownButtonsBox.setSpacing(5);
+        this.getChildren().addAll(leftButton, upDownButtonsBox, rightButton);
+        this.setSpacing(5); // TODO ?
     }
-
 }

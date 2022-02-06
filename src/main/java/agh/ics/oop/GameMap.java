@@ -36,7 +36,7 @@ public class GameMap
                 newPosition.y <= height - 1 && newPosition.y >= 0;
     }
 
-    public boolean canMoveTo(Individual ind, Vector2d newPosition)
+    private boolean canMoveTo(Individual ind, Vector2d newPosition)
     {
         return isWithinBounds(newPosition) && ind.getType().canWalkThrough(mapElements.get(newPosition));
     }
@@ -114,9 +114,20 @@ public class GameMap
         ind.getCivilization().changePrestigeResources(50);
     }
 
-    public boolean isOccupied(Vector2d position)
+    private boolean isOccupied(Vector2d position)
     {
         return !this.individuals.containsKey(position) && !this.cities.containsKey(position);
+    }
+
+    public Object objectAt(Vector2d position)
+    {
+        if (cities.containsKey(position))
+            return cities.get(position);
+
+        if (individuals.containsKey(position))
+            return individuals.get(position);
+
+        return null;
     }
 
     public void placeIndividual(Individual ind, Vector2d position)
@@ -127,5 +138,8 @@ public class GameMap
         }
     }
 
-
+    public MapElement getFieldElement(Vector2d position)
+    {
+        return mapElements.get(position);
+    }
 }
