@@ -4,13 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static agh.ics.oop.IndividualType.SETTLER;
+import static java.lang.Math.max;
+
 public class GameMap
 {
-    public static int width;
-    public static int height;
-    private Map<Vector2d, MapElement> mapElements = new HashMap<>();
-    private Map<Vector2d, City> cities = new HashMap<>();
-    private Map<Vector2d, Individual> individuals = new HashMap<>();
+    public final int width;
+    public final int height;
+    private final Map<Vector2d, MapElement> mapElements = new HashMap<>();
+    private final Map<Vector2d, City> cities = new HashMap<>();
+    private final Map<Vector2d, Individual> individuals = new HashMap<>();
 
     public GameMap(int width, int height)
     {
@@ -27,23 +30,15 @@ public class GameMap
         }
     }
 
-    public boolean isWithinBounds(Vector2d newPosition)
+    private boolean isWithinBounds(Vector2d newPosition)
     {
-        if (newPosition.x > width-1 || newPosition.x < 0 ||
-                newPosition.y > height-1 || newPosition.y < 0)
-        {
-            return false;
-        }
-        return true;
+        return newPosition.x <= width - 1 && newPosition.x >= 0 &&
+                newPosition.y <= height - 1 && newPosition.y >= 0;
     }
 
     public boolean canMoveTo(Individual ind, Vector2d newPosition)
     {
-        if (!isWithinBounds(newPosition) || !(ind.getType().canWalkThrough(mapElements.get(newPosition))))
-        {
-            return false;
-        }
-        return true;
+        return isWithinBounds(newPosition) && ind.getType().canWalkThrough(mapElements.get(newPosition));
     }
 
     public void move(Individual ind, Direction direction)
@@ -66,7 +61,7 @@ public class GameMap
     }
 
     /** attacker - the one making the move, defender - the one defending theirs position */
-    public void fight(Individual attacker, Individual defender)
+    private void fight(Individual attacker, Individual defender) // TODO fight parameters
     {
         Vector2d attackerPosition = attacker.getPosition();
         Vector2d defenderPosition = defender.getPosition();
@@ -77,25 +72,60 @@ public class GameMap
                 defender.getType().fightProfit(mapElement) + defender.getType().defenceProfit(mapElement);
         if (defenderFightPoints >= attackerFightPoints)
         {
+            defender.getCivilization().changePrestigeResources(20);
+            attacker.getCivilization().changePrestigeResources(-20);
             individuals.remove(attackerPosition);
             defender.setHealthPoints(defenderFightPoints - attackerFightPoints);
         }
         else
         {
+            defender.getCivilization().changePrestigeResources(-20);
+            attacker.getCivilization().changePrestigeResources(20);
             individuals.remove(defenderPosition);
             individuals.put(defenderPosition, attacker);
             attacker.setPosition(defenderPosition);
         }
     }
 
-    public void cityAttack(Individual ind, City city)
+    private void cityAttack(Individual attacker, City city)
     {
-        MapElement indMapElement = mapElements.get(ind.getPosition());
-        int indFightPoints = ind.getAttackPoints() + ind.getDefencePoints() +
-                ind.getType().fightProfit(indMapElement) + ind.getType().defenceProfit(indMapElement);
+        MapElement indMapElement = mapElements.get(attacker.getPosition());
+        int indFightPoints = attacker.getAttackPoints() + attacker.getDefencePoints() +
+                attacker.getType().fightProfit(indMapElement) + attacker.getType().defenceProfit(indMapElement);
+
+        city.setNumberOfCitizens(max(city.getNumberOfCitizens() - indFightPoints/10, 0));
+        city.setNumberOfHammers((int)(city.getNumberOfHammers()/2.0));
+        attacker.setHealthPoints((int)(attacker.getHealthPoints()/2.0));
+        if (attacker.getHealthPoints() == 0)
+            individuals.remove(attacker.getPosition());
+        if (city.getNumberOfCitizens() == 0)
+            cities.remove(city.getLocation());
     }
 
+    public void createCity(Individual ind)
+    {
+        if (ind.getType() == SETTLER && ind.getHealthPoints() > 50)
+        {
+            City city = new City(ind.getPosition(), ind.getCivilization());
+            cities.put(ind.getPosition(), city);
+            individuals.remove(ind.getPosition());
+        }
 
+        ind.getCivilization().changePrestigeResources(50);
+    }
+
+    public boolean isOccupied(Vector2d position)
+    {
+        return !this.individuals.containsKey(position) && !this.cities.containsKey(position);
+    }
+
+    public void placeIndividual(Individual ind, Vector2d position)
+    {
+        if (!isOccupied(position))
+        {
+            this.individuals.put(position, ind);
+        }
+    }
 
 
 }

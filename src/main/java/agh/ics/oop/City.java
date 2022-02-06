@@ -2,20 +2,25 @@ package agh.ics.oop;
 
 public class City
 {
-    public final Civilization belongsTo;
+    public final Civilization civilization;
     public final Vector2d location;
     private int numberOfCitizens;
+    private int hammersProduction;
     private int numberOfHammers;
     private int foodProduction;
-    private int numberOfBuilding;
-
+    private int foodAmount;
+    private int numberOfBuildings;
+    // TODO city parameters
     public City(Vector2d location, Civilization civ)
     {
         this.location = location;
-        this.numberOfCitizens = 10; // my ustalamy, a nie użytkownik debil
+        this.numberOfCitizens = 10;
         this.numberOfHammers = 50;
-        this.foodProduction = 2;
-        this.belongsTo = civ;
+        this.foodAmount = 0;
+        this.numberOfBuildings = 1;
+        this.foodProduction = this.numberOfBuildings + this.numberOfCitizens/10;
+        this.hammersProduction = 5 * this.numberOfBuildings;
+        this.civilization = civ;
     }
 
     public Vector2d getLocation()
@@ -28,13 +33,47 @@ public class City
         this.numberOfCitizens = numberOfCitizens;
     }
 
+    public void setNumberOfHammers(int numberOfHammers)
+    {
+        this.numberOfHammers = numberOfHammers;
+    }
+
     public int getNumberOfCitizens()
     {
         return numberOfCitizens;
     }
 
-    public void setNumberOfHammers(int numberOfHammers)
+    public int getNumberOfHammers()
     {
-        this.numberOfHammers = numberOfHammers;
+        return numberOfHammers;
     }
+
+    public void buildNewBuilding()
+    {
+        numberOfBuildings++;
+        numberOfHammers -= 50;
+        civilization.changePrestigeResources(30);
+    }
+
+    public void createNewCitizens() {
+        if (foodAmount > 10) {
+            numberOfCitizens += foodAmount / 10;
+            foodAmount = foodAmount % 10;
+        }
+    }
+
+    // called at the beginning of each round
+    public void updateStatistics()
+    {
+        this.foodProduction = this.numberOfBuildings + this.numberOfCitizens/10;
+        this.hammersProduction = this.numberOfBuildings * 5;
+        this.civilization.changeGoldResources(numberOfCitizens*2);
+    }
+
+    public void produceFoodAndHammers()
+    {
+        foodAmount += foodProduction;
+        numberOfHammers += hammersProduction;
+    }
+
 }

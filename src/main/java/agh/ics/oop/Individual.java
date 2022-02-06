@@ -58,4 +58,10 @@ public class Individual
     {
         return defencePoints;
     }
+
+    public Civilization getCivilization()
+    {
+        return this.belongsTo;
+    }
+
 }

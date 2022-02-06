@@ -47,7 +47,7 @@ public enum IndividualType {
         return result;
     }
 
-    public int fightProfit(MapElement field)
+    public int fightProfit(MapElement field) // TODO profits
     {
         int result = 0;
         switch(field)

@@ -10,4 +10,14 @@ public class Civilization
         this.goldResources = goldResources;
         this.prestigeResources = prestigeResources;
     }
+
+    public void changePrestigeResources(int value)
+    {
+        this.prestigeResources += value;
+    }
+
+    public void changeGoldResources(int value)
+    {
+        this.goldResources += value;
+    }
 }

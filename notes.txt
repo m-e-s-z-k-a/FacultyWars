@@ -15,6 +15,16 @@
 		ile sie przez nie idzie
 		profity - ew. rozdzielic
 		jakie jednostki moga wejsc
+
+5. klasa typ jednostki
+	parametry:
+		o ile pol sie rusza co ture
+		siła
+6. klasa Vector2d
+	parametry:
+		iks
+		igrek
+
 3. klasa miasto
 	parametry:
 		do ktorej cywilizacji nalezy
@@ -24,9 +34,12 @@
 		ilosc mieszkancow
 		ilosc budynkow
 	metody:
-		nowy budynek
-		nowa jednostka (po chuj)
-		produkcja jedzenia
+		[DONE] nowy budynek
+		[DONE] nowa jednostka
+		[DONE] produkcja jedzenia
+
+mozna osobne klasy na osobne typy jednostki, ale to zalezy ile ich bedzie (jak malo to ok ale jak duzo to nie) [DONE]
+
 4. klasa jednostka
 	parametry:
 		gdzie ona wgl jest
@@ -35,35 +48,30 @@
 		punkty zycia
 	metody:
 		utworz miasto - osadnik
-5. klasa typ jednostki 
-	parametry:
-		o ile pol sie rusza co ture
-		siła 
-6. klasa Vector2d
-	parametry:
-		iks
-		igrek
+
 7. klasa cywilizacja 
 	parametry:
 		zasoby złota
 		zasoby prestiżu
+
+    cywilizacja dostaje punkty prestiżu za:
+    - wygraną walkę
+    - zbudowany budynek
+    - każde zbudowane miasto
+    - złoto (na koniec) TODO
+
+    cywilizacja dostaje złoto za:
+    - każde x mieszkańców na początku tury (podatki)
+
+
 8. simulejszyn endżin
 	metody:
 		inicjalizacja
-		
 
-mozna osobne klasy na osobne typy jednostki, ale to zalezy ile ich bedzie (jak malo to ok ale jak duzo to nie)
+
+------------------------------
 
 liczba tur dajmy na to 100
 jak inne cywilizacje przestana istniec przed 100 to wygrywa ta co przezyla
 jak zadna jednostka nie przezyje do 100 to wygrywa ta z najwiekszym prestizem (cywilizacja)
 jak dobijemy do 100 to koniec i wygrywaja ci co maja najweicej prestizu pora na csa
-	
-cywilizacja dostaje punkty prestiżu za:
-- wygraną walkę
-- zbudowany budynek
-- każde zbudowane miasto
-- złoto
-
-cywilizacja dostaje złoto za:
-- każde x mieszkańców
