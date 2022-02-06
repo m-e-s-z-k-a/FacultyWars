@@ -9,9 +9,9 @@ import javafx.scene.text.Font;
 public class WelcomeScreen extends VBox
 {
     Label title = new Label("Willkommen aus dem Spiel");
-    public ParameterBox playersNumberBox = new ParameterBox("number of players", 2, 10);
-    public ParameterBox mapWidthBox = new ParameterBox("map width", 10, 100);
-    public ParameterBox mapHeightBox = new ParameterBox("map height", 10, 100);
+    public ParameterBox playersNumberBox = new ParameterBox("number of players", 2, 5);
+    public ParameterBox mapWidthBox = new ParameterBox("map width", 10, 30);
+    public ParameterBox mapHeightBox = new ParameterBox("map height", 10, 30);
     public Button startButton = new Button("start!");
 
     public WelcomeScreen()

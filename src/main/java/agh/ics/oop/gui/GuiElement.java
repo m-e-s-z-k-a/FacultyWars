@@ -18,12 +18,12 @@ public class GuiElement {
         put(MapElement.MOUNTAINS, new Image(MapElement.MOUNTAINS.getImagePath()));
     }};
 
-    public static ImageView createElement(MapElement element)
+    public static ImageView createElement(MapElement element, double CELL_WIDTH, double CELL_HEIGHT)
     {
         ImageView imageView = new ImageView(viewsMap.get(element));
         // TODO check if not rozjechane
-        GridPane.setFillHeight(imageView, true);
-        GridPane.setFillWidth(imageView, true);
-        return new ImageView(viewsMap.get(element));
+        imageView.setFitHeight(CELL_HEIGHT);
+        imageView.setFitWidth(CELL_WIDTH);
+        return imageView;
     }
 }

@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Cell;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -16,11 +17,17 @@ import javafx.stage.Stage;
 
 public class App extends Application{
 
+    private final double GRID_SIZE = 600.0;
+    private double CELL_WIDTH;
+    private double CELL_HEIGHT;
+
+    private final int NUMBER_OF_ROUNDS = 15;
+
     private GridPane mapGridPane;
     private SimulationEngine engine;
     private GameMap gameMap;
     private WelcomeScreen welcomeBox;
-    private final int NUMBER_OF_ROUNDS = 15;
+
     private int width;
     private int height;
     @Override
@@ -40,6 +47,8 @@ public class App extends Application{
                 this.gameMap = engine.getGameMap();
                 welcomeStage.close();
                 System.out.println(height + " " + width + " " + numberOfPlayers); // TODO remove test
+                CELL_HEIGHT = GRID_SIZE/height;
+                CELL_WIDTH = GRID_SIZE/width;
             });
         });
 
@@ -64,8 +73,8 @@ public class App extends Application{
                 Vector2d position = new Vector2d(i, j);
                 Object obj = gameMap.objectAt(position);
 
-                if (obj != null)
-                    mapGridPane.add(GuiElement.createElement(gameMap.getFieldElement(position)), i, j);
+                if (obj == null)
+                    mapGridPane.add(GuiElement.createElement(gameMap.getFieldElement(position), CELL_WIDTH, CELL_HEIGHT), i, j);
 //                else
 //                {
 //                    GridPane.setHalignment(button, HPos.CENTER);
@@ -82,7 +91,8 @@ public class App extends Application{
         for(int i = 0; i < width; i++)
         {
             ColumnConstraints col1 = new ColumnConstraints();
-            col1.setPercentWidth(100);
+            col1.setMaxWidth(CELL_WIDTH);
+            col1.setMinWidth(CELL_WIDTH);
             mapGridPane.getColumnConstraints().add(col1);
         }
 
@@ -90,7 +100,8 @@ public class App extends Application{
         for(int i = 0; i < height; i++)
         {
             RowConstraints row1 = new RowConstraints();
-            row1.setPercentHeight(100);
+            row1.setMaxHeight(CELL_HEIGHT);
+            row1.setMinHeight(CELL_HEIGHT);
             mapGridPane.getRowConstraints().add(row1);
         }
     }
