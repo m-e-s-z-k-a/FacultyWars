@@ -1,6 +1,7 @@
 package agh.ics.oop.gui;
 
 import agh.ics.oop.*;
+import com.sun.source.doctree.StartElementTree;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,7 +51,7 @@ public class GuiElement {
         return imageView;
     }
 
-    public static Button createIndividualButton(Individual individual, double CELL_WIDTH, double CELL_HEIGHT)
+    public static Button createIndividualButton(Individual individual, double CELL_WIDTH, double CELL_HEIGHT, App app)
     {
         ImageView imageView = new ImageView(individualsMap.get(individual.getType()));
 
@@ -70,22 +71,45 @@ public class GuiElement {
             MoveControls moveControls = new MoveControls();
             Text belongsToText = new Text("this individual belongs to civilization no " + individual.getCivilization().getOrdinal());
             Text healthPointsText = new Text("this individual has " + individual.getHealthPoints() + " health points");
+            Text movesLeftText = new Text("this individual has " + individual.getAvailableMovePoints() + " moves left");
             VBox indVbox = new VBox();
+            Button createCityButton = new Button("CREATE CITY");
+            Scene newScene = new Scene(indVbox, 400, 200);
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.show();
             if (individual.getCivilization().getOrdinal() == 1)
             {
-                indVbox.getChildren().addAll(belongsToText, healthPointsText, moveControls);
+                if (individual.getType() == IndividualType.SETTLER)
+                {
+                    indVbox.getChildren().add(createCityButton);
+                    createCityButton.setOnAction(event -> {
+                        individual.getGameMap().createCity(individual);
+                        app.mapUpdate();
+                        newStage.hide();
+                    });
+                }
+                indVbox.getChildren().addAll(belongsToText, healthPointsText, movesLeftText, moveControls);
                 indVbox.setAlignment(Pos.CENTER);
                 moveControls.leftButton.setOnAction(ev1 -> {
                     individual.getGameMap().move(individual, Direction.LEFT);
+                    app.mapUpdate();
+                    newStage.hide();
                 });
                 moveControls.upButton.setOnAction(ev2 -> {
-                    individual.getGameMap().move(individual, Direction.FORWARD);
+                    individual.getGameMap().move(individual, Direction.BACKWARD);
+                    app.mapUpdate();
+                    newStage.hide();
                 });
                 moveControls.rightButton.setOnAction(ev3 -> {
                     individual.getGameMap().move(individual, Direction.RIGHT);
+                    app.mapUpdate();
+                    newStage.hide();
                 });
                 moveControls.downButton.setOnAction(ev4 -> {
-                    individual.getGameMap().move(individual, Direction.BACKWARD);
+                    individual.getGameMap().move(individual, Direction.FORWARD);
+                    app.mapUpdate();
+                    newStage.hide();
                 });
             }
             else
@@ -93,10 +117,6 @@ public class GuiElement {
                 indVbox.getChildren().addAll(belongsToText, healthPointsText);
                 indVbox.setAlignment(Pos.CENTER);
             }
-            Scene newScene = new Scene(indVbox, 400, 200);
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.show();
         });
 
         return button;
@@ -104,7 +124,6 @@ public class GuiElement {
 
     public static Button createCityButton(City city, double CELL_WIDTH, double CELL_HEIGHT)
     {
-        // TODO parameters + onAction
         ImageView imageView;
         if (city.getNumberOfCitizens() < 10)
             imageView = new ImageView(cityMap.get(1));

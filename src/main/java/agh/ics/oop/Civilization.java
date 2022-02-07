@@ -27,4 +27,13 @@ public class Civilization
     {
         return ordinal;
     }
+
+    public int getPrestigeResources()
+    {
+        return prestigeResources;
+    }
+
+    public int getGoldResources() {
+        return goldResources;
+    }
 }

@@ -58,7 +58,7 @@ mozna osobne klasy na osobne typy jednostki, ale to zalezy ile ich bedzie (jak m
     - wygraną walkę
     - zbudowany budynek
     - każde zbudowane miasto
-    - złoto (na koniec) TODO
+    - złoto (na koniec)
 
     cywilizacja dostaje złoto za:
     - każde x mieszkańców na początku tury (podatki)

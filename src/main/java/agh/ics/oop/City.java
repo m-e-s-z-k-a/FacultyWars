@@ -10,7 +10,6 @@ public class City
     private int foodProduction;
     private int foodAmount;
     private int numberOfBuildings;
-    // TODO city parameters
     public City(Vector2d location, Civilization civ)
     {
         this.location = location;

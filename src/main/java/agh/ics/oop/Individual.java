@@ -20,6 +20,8 @@ public class Individual
         this.type = type;
         this.availableMovePoints = type.getMovePoints();
         this.gameMap = gameMap;
+        this.attackPoints = type.getAttackPoints();
+        this.defencePoints = type.getDefencePoints();
     }
 
     public IndividualType getType()
@@ -78,10 +80,15 @@ public class Individual
         return false;
     }
 
-    // na początku tury
+    // at the beginning of round
     public void refreshMovePoints()
     {
         this.availableMovePoints = type.getMovePoints();
+    }
+
+    public int getAvailableMovePoints()
+    {
+        return this.availableMovePoints;
     }
 
     public GameMap getGameMap()

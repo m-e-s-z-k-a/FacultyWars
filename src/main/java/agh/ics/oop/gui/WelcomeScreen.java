@@ -20,7 +20,7 @@ public class WelcomeScreen extends VBox
         title.setFont(new Font("Comic Sans MS", 20));
         startButton.setFont(new Font("Comic Sans MS", 10));
         this.getChildren().addAll(title, playersNumberBox, mapWidthBox, mapHeightBox, startButton);
-        this.setAlignment(Pos.CENTER); // TODO ?
+        this.setAlignment(Pos.CENTER);
         this.setSpacing(15);
     }
 }

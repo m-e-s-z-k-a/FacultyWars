@@ -9,6 +9,34 @@ public enum IndividualType {
     MOUNTAIN_MAN,
     SETTLER;
 
+    public int getAttackPoints()
+    {
+        return switch(this)
+        {
+            case AGGRESSOR -> 15;
+            case MAGE -> 5;
+            case PIRATE -> 11;
+            case SANDMAN -> 2;
+            case HIKER -> 7;
+            case MOUNTAIN_MAN -> 9;
+            case SETTLER -> 1;
+        };
+    }
+
+    public int getDefencePoints()
+    {
+        return switch(this)
+        {
+            case AGGRESSOR -> 0;
+            case MAGE -> 10;
+            case PIRATE -> 4;
+            case SANDMAN -> 15;
+            case HIKER -> 7;
+            case MOUNTAIN_MAN -> 9;
+            case SETTLER -> 6;
+        };
+    }
+
     public boolean canWalkThrough(MapElement field)
     {
         boolean result;
@@ -47,7 +75,7 @@ public enum IndividualType {
         return result;
     }
 
-    public int fightProfit(MapElement field) // TODO profits
+    public int fightProfit(MapElement field)
     {
         int result = 0;
         switch(field)

@@ -45,7 +45,7 @@ public class GameMap
     {
         Vector2d oldPosition = ind.getPosition();
         Vector2d newPosition = ind.getPosition().add(direction.toUnitVector());
-        if (canMoveTo(ind, newPosition) || ind.useMovePoint())
+        if (canMoveTo(ind, newPosition) && ind.useMovePoint())
         {
             if (individuals.containsKey(newPosition))
                 fight(ind, individuals.get(newPosition));
@@ -61,8 +61,10 @@ public class GameMap
     }
 
     /** attacker - the one making the move, defender - the one defending theirs position */
-    private void fight(Individual attacker, Individual defender) // TODO fight parameters
+    private void fight(Individual attacker, Individual defender)
     {
+        if (attacker.getCivilization() != defender.getCivilization())
+        {
         Vector2d attackerPosition = attacker.getPosition();
         Vector2d defenderPosition = defender.getPosition();
         MapElement mapElement = mapElements.get(defenderPosition);
@@ -75,7 +77,7 @@ public class GameMap
             defender.getCivilization().changePrestigeResources(20);
             attacker.getCivilization().changePrestigeResources(-20);
             individuals.remove(attackerPosition);
-            defender.setHealthPoints(defenderFightPoints - attackerFightPoints);
+            defender.setHealthPoints(max(defenderFightPoints - attackerFightPoints, 1));
         }
         else
         {
@@ -84,11 +86,14 @@ public class GameMap
             individuals.remove(defenderPosition);
             individuals.put(defenderPosition, attacker);
             attacker.setPosition(defenderPosition);
-        }
+            defender.setHealthPoints(max(attackerFightPoints - defenderFightPoints, 1));
+        }}
     }
 
     private void cityAttack(Individual attacker, City city)
     {
+        if (attacker.getCivilization() != city.getCivilization() && attacker.useMovePoint())
+        {
         MapElement indMapElement = mapElements.get(attacker.getPosition());
         int indFightPoints = attacker.getAttackPoints() + attacker.getDefencePoints() +
                 attacker.getType().fightProfit(indMapElement) + attacker.getType().defenceProfit(indMapElement);
@@ -100,6 +105,7 @@ public class GameMap
             individuals.remove(attacker.getPosition());
         if (city.getNumberOfCitizens() == 0)
             cities.remove(city.getLocation());
+        }
     }
 
     public void createCity(Individual ind)
@@ -165,5 +171,15 @@ public class GameMap
             city.createNewCitizens();
             city.produceFoodAndHammers();
         }
+    }
+
+    public Map<Vector2d, Individual> getIndMap()
+    {
+        return this.individuals;
+    }
+
+    public Map<Vector2d, City> getCityMap()
+    {
+        return this.cities;
     }
 }
