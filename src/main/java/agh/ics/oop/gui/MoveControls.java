@@ -8,10 +8,10 @@ import javafx.scene.layout.VBox;
 public class MoveControls extends HBox
 {
 
-    public Button upButton = new Button("\u2191");
-    public Button downButton = new Button("\u2193");
-    public Button leftButton = new Button("\u2190");
-    public Button rightButton = new Button("\u2192");
+    public final Button upButton = new Button("\u2191");
+    public final Button downButton = new Button("\u2193");
+    public final Button leftButton = new Button("\u2190");
+    public final Button rightButton = new Button("\u2192");
 
     public MoveControls()
     {

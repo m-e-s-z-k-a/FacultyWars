@@ -4,7 +4,7 @@ public class Civilization
 {
     private int goldResources;
     private int prestigeResources;
-    private int ordinal;
+    private final int ordinal;
 
     public Civilization(int ordinal)
     {

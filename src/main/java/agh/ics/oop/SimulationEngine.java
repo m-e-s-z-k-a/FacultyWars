@@ -14,7 +14,7 @@ import static agh.ics.oop.IndividualType.SETTLER;
 
 public class SimulationEngine implements Runnable
 {
-    private App app;
+    private final App app;
     private final int numberOfRounds;
     private final int numberOfPlayers;
     private boolean duringMove;
@@ -41,9 +41,9 @@ public class SimulationEngine implements Runnable
             int cities_put = 0;
             do
             {
-                int x_coord = random.nextInt(this.width);
-                int y_coord = random.nextInt(this.height);
-                Vector2d init_position = new Vector2d(x_coord, y_coord);
+                int x_cord = random.nextInt(this.width);
+                int y_cord = random.nextInt(this.height);
+                Vector2d init_position = new Vector2d(x_cord, y_cord);
                 if (!this.gameMap.isOccupied(init_position))
                 {
                     this.gameMap.placeCityAtTheBeginning(civ, init_position);
@@ -55,9 +55,9 @@ public class SimulationEngine implements Runnable
             int settlers_put = 0;
             do
             {
-                int x_coord = random.nextInt(this.width);
-                int y_coord = random.nextInt(this.height);
-                Vector2d init_position = new Vector2d(x_coord, y_coord);
+                int x_cord = random.nextInt(this.width);
+                int y_cord = random.nextInt(this.height);
+                Vector2d init_position = new Vector2d(x_cord, y_cord);
                 if (!this.gameMap.isOccupied(init_position))
                 {
                     Individual ind = new Individual(civ, init_position, SETTLER, this.gameMap);
@@ -71,9 +71,9 @@ public class SimulationEngine implements Runnable
 
             int rest_of_chars_put = 0;
             do {
-                int x_coord = random.nextInt(this.width);
-                int y_coord = random.nextInt(this.height);
-                Vector2d init_position = new Vector2d(x_coord, y_coord);
+                int x_cord = random.nextInt(this.width);
+                int y_cord = random.nextInt(this.height);
+                Vector2d init_position = new Vector2d(x_cord, y_cord);
                 int ind_type = random.nextInt(6);
                 if (!this.gameMap.isOccupied(init_position)  &&
                         indTypes[ind_type].canWalkThrough(this.gameMap.getFieldElement(init_position)))
@@ -205,11 +205,10 @@ public class SimulationEngine implements Runnable
         if (isCivDead(0))
         {
             // make computer moves till last round then end
-            for(int i = currentRound; i < numberOfRounds + 1; currentRound++)
+            for(int i = currentRound; i < numberOfRounds + 1; i++)
                 computerMoves();
             return true;
         }
-
 
         for(int i = 1; i < numberOfPlayers; i++)
             if (!isCivDead(i))

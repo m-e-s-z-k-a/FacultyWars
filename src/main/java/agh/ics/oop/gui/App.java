@@ -32,7 +32,7 @@ public class App extends Application {
     public void start(Stage primaryStage)
     {
         welcomeBox = new WelcomeScreen();
-        Scene welcomeScene = new Scene(welcomeBox, 300, 300);
+        Scene welcomeScene = new Scene(welcomeBox, 550, 400);
         Stage welcomeStage = new Stage();
         welcomeStage.setScene(welcomeScene);
 
@@ -50,6 +50,7 @@ public class App extends Application {
                 thread.start();
         }));
 
+        welcomeStage.setOnCloseRequest(e -> System.exit(0));
         welcomeStage.showAndWait();
 
         VBox vbox = new VBox();
@@ -67,12 +68,10 @@ public class App extends Application {
         vbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(10);
 
-        Scene mainScene = new Scene(vbox, 500, 500);
+        Scene mainScene = new Scene(vbox, 800, 800);
         mapGridPane.setAlignment(Pos.CENTER);
         primaryStage.setScene(mainScene);
-        primaryStage.setOnCloseRequest(e ->{
-            System.exit(0);
-        });
+        primaryStage.setOnCloseRequest(e -> System.exit(0));
         this.primaryStage = primaryStage;
         primaryStage.show();
     }

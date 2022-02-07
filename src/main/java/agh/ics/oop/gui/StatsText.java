@@ -7,7 +7,7 @@ import javafx.scene.text.Text;
 
 public class StatsText extends HBox
 {
-    private SimulationEngine engine;
+    private final SimulationEngine engine;
     public StatsText(SimulationEngine engine)
     {
         this.engine = engine;

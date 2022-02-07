@@ -3,14 +3,14 @@ package agh.ics.oop;
 
 public class Individual
 {
-    private Civilization belongsTo;
+    private final Civilization belongsTo;
     private Vector2d position;
-    private IndividualType type;
+    private final IndividualType type;
     private int healthPoints;
-    private int attackPoints;
-    private int defencePoints;
+    private final int attackPoints;
+    private final int defencePoints;
     private int availableMovePoints;
-    private GameMap gameMap;
+    private final GameMap gameMap;
 
     public Individual(Civilization civ, Vector2d position, IndividualType type, GameMap gameMap)
     {

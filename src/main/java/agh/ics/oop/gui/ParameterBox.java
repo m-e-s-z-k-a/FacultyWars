@@ -8,7 +8,7 @@ import javafx.scene.text.Font;
 
 public class ParameterBox extends HBox
 {
-    Font font = new Font("Comic Sans MS", 12);
+    private final Font font = new Font("Comic Sans MS", 15);
 
     public ParameterBox(String title, int min, int max)
     {

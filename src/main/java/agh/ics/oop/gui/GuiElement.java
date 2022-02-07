@@ -1,7 +1,6 @@
 package agh.ics.oop.gui;
 
 import agh.ics.oop.*;
-import com.sun.source.doctree.StartElementTree;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
