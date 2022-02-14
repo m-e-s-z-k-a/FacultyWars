@@ -80,6 +80,10 @@ public class Individual
         return false;
     }
 
+    public void refundMovePoints(){
+        this.availableMovePoints++;
+    }
+
     // at the beginning of round
     public void refreshMovePoints()
     {

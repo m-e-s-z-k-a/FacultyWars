@@ -41,6 +41,7 @@ public class GameMap
         return isWithinBounds(newPosition) && ind.getType().canWalkThrough(mapElements.get(newPosition));
     }
 
+
     public void move(Individual ind, Direction direction)
     {
         Vector2d oldPosition = ind.getPosition();
@@ -89,6 +90,10 @@ public class GameMap
                 attacker.setHealthPoints(max(attackerFightPoints - defenderFightPoints, 1));
             }
         }
+        else
+        {
+            attacker.refundMovePoints();
+        }
     }
 
     private void cityAttack(Individual attacker, City city)
@@ -106,6 +111,10 @@ public class GameMap
                 individuals.remove(attacker.getPosition());
             if (city.getNumberOfCitizens() == 0)
                 cities.remove(city.getLocation());
+        }
+        else
+        {
+            attacker.refundMovePoints();
         }
     }
 
